@@ -1,0 +1,37 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558 
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc", //与launch中的一致
+            "command": "C:\\mingw64\\mingw64\\bin\\gcc.exe",
+            "args": [
+                "-g",    ////< 参数-g  可以使断点有效，输出异常信息，便于调试
+                 ////<  这是项目下的多个.c文件，如果项目主函数中调用了多个.c文件中的接口，则要显式的加在这里
+                "${fileDirname}/../src/Circle.c",
+                "${fileDirname}/../src/Rectangle.c",
+                "${fileDirname}/../src/Shape.c",
+                "${fileDirname}/../src/ShapeFactory.c",
+                "${fileDirname}/../src/Square.c",
+                // "${fileDirname}/FactoryPatternDemo.c",
+                //"${fileDirname}\\convert_to_csv.c", 
+                "${file}",                   ////< 主函数所在的.c文件
+                "-I","${fileDirname}/../inc",	 ////< 参数-I 和工程路径 指明了项目中要引用的非标准头文件的位置
+                // "-Wno-int-to-pointer-cast",
+                "-Werror",                   ////<  把所有警告转换为错误，以在警告发生时中止编译过程
+                // "-Wall",                  ////< 生成所有警告信息
+                //"-w",                      ////< 不生成任何警告信息
+                "-o",                        ////< -o之前添加编译选项
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "C:\\mingw64\\mingw64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}
